@@ -1,65 +1,62 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { client } from "../prismic-configuration";
+import { RichText } from "prismic-reactjs";
+import Link from "next/link";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>{RichText.asText(props?.home?.data?.heading)}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      {/* {console.log(props?.home?.data)} */}
+      <main className="max-h-screen m-auto w-8/12 flex flex-row sm:flex-col md:flex-row lg:flex-row xl:flex-row">
+        <div className="m-auto w-auto">
+          <h1 className="text-gray-900 font-thin text-lg leading-snug">
+            {RichText.asText(props?.home?.data?.aboveheading)}
+          </h1>
+          <h1 className="text-gray-900 font-semibold text-6xl leading-none">
+            {RichText.asText(props?.home?.data?.heading)}
+          </h1>
+          <h1 className="text-gray-900 font-semibold text-6xl leading-none">
+            {RichText.asText(props?.home?.data?.subheading)}
+          </h1>
+          <h1 className="mt-6 text-gray-900 font-thin text-xs ">
+            {RichText.asText(props?.home?.data?.disclaimer)}
+          </h1>
+          <div className="flex lex-row">
+            <button className="transition duration-500 ease-in-out bg-blue-500 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded-md mt-6">
+              {/* Todo - add a contact form page, add a portfolio page */}
+              <Link href={"/pages/contact-form"}>
+                <a className="font-thin text-lg leading-snug">Get in touch</a>
+              </Link>
+            </button>
+            <button className="ml-6 transition duration-500 ease-in-out font-thin hover:font-normal transform hover:-translate-y-1 hover:scale-110 text-black text-lg leading-snug py-2 px-4 rounded-md mt-6">
+              <Link href={`/pages/portfolio`}>
+                <a className="">See my work &rarr;</a>
+              </Link>
+            </button>
+          </div>
+        </div>
+        <div className="m-auto">
+          <img
+            className="object-contain m-4"
+            src={props?.home?.data?.heroimage?.url}
+          />
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
-  )
+  );
+}
+
+export async function getStaticProps() {
+  const home = await client.getSingle("headline-hero");
+
+  return {
+    props: {
+      home
+    }
+  };
 }
