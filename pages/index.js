@@ -11,10 +11,9 @@ export default function Home(props) {
         <title>{RichText.asText(props?.home?.data?.heading)}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* {console.log(props?.home?.data)} */}
       <main className="max-h-screen m-auto w-8/12 flex flex-row sm:flex-col md:flex-row lg:flex-row xl:flex-row">
         <div className="m-auto w-auto">
-          <h1 className="text-gray-900 font-thin text-lg leading-snug">
+          <h1 className="font-sans text-gray-900 font-thin text-lg leading-snug">
             {RichText.asText(props?.home?.data?.aboveheading)}
           </h1>
           <h1 className="text-gray-900 font-semibold text-6xl leading-none">
