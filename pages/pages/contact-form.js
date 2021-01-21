@@ -17,7 +17,7 @@ export default function ContactForm(props) {
         <title>{pageTitle}</title>
       </Head>
 
-      <main>
+      <main className={styles.main}>
         <h1 className="mt-6 text-gray-900 font-semibold text-6xl leading-none">
           {pageTitle}
         </h1>

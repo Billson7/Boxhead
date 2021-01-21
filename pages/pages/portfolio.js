@@ -14,7 +14,7 @@ export default function Portfolio(props) {
         <title>Portfolio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className={styles.main}>
         <h1 className="mt-6 text-gray-900 font-semibold text-6xl leading-none">
           {pageHeading}
         </h1>
