@@ -19,43 +19,44 @@ export default function Portfolio(props) {
           {pageHeading}
         </h1>
       </main>
+      <div className={styles.main}>
+        <div className="flex mt-6 grid grid-cols-3 grid-rows-3 gap-4">
+          {props?.posts?.results.map(post => (
+            <div
+              key={post?.uid}
+              className="bg-white opacity-100 max-w-sm m-4 p-4 rounded-md shadow-xl"
+            >
+              <Link href={`${post?.data?.externalurl?.url}`}>
+                <a>
+                  <img className="object-cover" src={post?.data?.image?.url} />
+                  <div className="pl-3">
+                    <p className="text-gray-900 mt-4 font-semibold text-lg leading-tight truncate">
+                      {RichText.asText(post?.data?.title)}
+                    </p>
+                    <p className="text-gray-600 mt-1 text-sm leading-tight truncate">
+                      {RichText.asText(post?.data?.description)}
+                    </p>
 
-      <div className="flex mt-6 grid grid-cols-3 grid-rows-3 gap-4">
-        {props?.posts?.results.map(post => (
-          <div
-            key={post?.uid}
-            className="bg-white opacity-100 max-w-sm m-4 p-4 rounded-md shadow-xl"
-          >
-            <Link href={`${post?.data?.externalurl?.url}`}>
-              <a>
-                <img className="object-cover" src={post?.data?.image?.url} />
-                <div className="pl-3">
-                  <p className="text-gray-900 mt-4 font-semibold text-lg leading-tight truncate">
-                    {RichText.asText(post?.data?.title)}
-                  </p>
-                  <p className="text-gray-600 mt-1 text-sm leading-tight truncate">
-                    {RichText.asText(post?.data?.description)}
-                  </p>
-
-                  <p className="text-gray-900 text-sm ml-0 m-4">
-                    More information &rarr;
-                  </p>
-                </div>
-              </a>
-            </Link>
-          </div>
-        ))}
+                    <p className="text-gray-900 text-sm ml-0 m-4">
+                      More information &rarr;
+                    </p>
+                  </div>
+                </a>
+              </Link>
+            </div>
+          ))}
+        </div>
+        <Link href={"/"}>
+          <button className="transition duration-500 ease-in-out bg-blue-500 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded-md mt-6">
+            <a className="font-thin text-lg leading-snug">Back</a>
+          </button>
+        </Link>
+        <footer className="mb-4">
+          <h1 className="mt-6 text-gray-900 font-thin text-xs ">
+            {RichText.asText(props?.home?.data?.disclaimer)}
+          </h1>
+        </footer>
       </div>
-      <Link href={"/"}>
-        <button className="transition duration-500 ease-in-out bg-blue-500 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded-md mt-6">
-          <a className="font-thin text-lg leading-snug">Back</a>
-        </button>
-      </Link>
-      <footer className="mb-4">
-        <h1 className="mt-6 text-gray-900 font-thin text-xs ">
-          {RichText.asText(props?.home?.data?.disclaimer)}
-        </h1>
-      </footer>
     </div>
   );
 }
